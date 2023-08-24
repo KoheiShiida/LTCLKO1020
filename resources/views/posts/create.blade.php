@@ -1,15 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <title>Blog</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
     </head>
     <body>
-        <h1>Blog Name </h1>
+        <h1>Blog Name</h1>
         <form action="/posts" method="POST">
             @csrf
             <div class="title">
@@ -23,7 +19,15 @@
                 <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
             </div>
             <input type="submit" value="保存"/>
-        </form>
         <div class="back">[<a href="/">back</a>]</div>
+        <div class="category">
+            <h2>Category</h2>
+            <select name="post[category_id]">
+                @foreach($categories as $category)
+                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
     </body>
+        </form>
 </html>

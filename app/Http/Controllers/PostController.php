@@ -7,6 +7,7 @@ use App\Models\post;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -18,11 +19,6 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('posts.show')->with(['post' => $post]);
-    }
-    
-    public function create()
-    {
-        return view('posts.create');
     }
     
     public function store(post $post, PostRequest $request)
@@ -50,5 +46,10 @@ class PostController extends Controller
     {
     $post->delete();
         return redirect('/');
+    }
+    
+    public function create(Category $category)
+    {
+    return view('posts.create')->with(['categories' => $category->get()]);
     }
 }
